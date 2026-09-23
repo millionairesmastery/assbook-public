@@ -5,9 +5,11 @@
 An MIT-licensed social-network beta with one ridiculous premise: your profile
 photo is your own fully clothed behind. No face recognition. Just hindsight.
 
-**See it live at [assbook.app](https://assbook.app).** That is this code,
-running on Cloudflare, with real people on it. Join, post, peek, and see how
-it works before you read a line of it.
+**See it live at [assbook.app](https://assbook.app).** The live site grew
+out of this code and has moved on since: it runs a newer edition with screens
+and features that are not published here. This repository is the complete,
+MIT-licensed base. Everything in it works on its own, on your own Cloudflare
+account.
 
 ## What works
 
