@@ -38,8 +38,10 @@ async function confirmPassword(req: Request, data: Record<string, unknown>) {
   await ipLimit(req, "sensitive");
   await rate("sensitive:user:" + me.id, 8, 900000);
   const user = await account(me.id);
+  // 400, not 401: the member is signed in, and clients read a 401 as "join
+  // or sign in", which is the wrong thing to tell them about a typo.
   if (!await verifyPassword(passwordInput(data.currentPassword), user.password, user.salt))
-    throw new HttpError(401, "Your current password does not match.");
+    throw new HttpError(400, "Your current password does not match.");
   return user;
 }
 function origin(req: Request) {

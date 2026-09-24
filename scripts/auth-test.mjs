@@ -114,8 +114,9 @@ try {
   await request(anon,"auth/reset",{token:fixture("reset",Date.now()-1),password},400);
   await request(anon,"auth/verify-email",{token:fixture("verify",Date.now()-1)},400);
   const stale = fixture("reset");
-  await request(a,"auth/password",{currentPassword:"wrong",password},401);
-  await request(a,"auth/email",{currentPassword:"wrong",email:"new@example.com"},401);
+  // A signed-in member who mistypes gets a 400: a 401 would read as "sign in".
+  await request(a,"auth/password",{currentPassword:"wrong",password},400);
+  await request(a,"auth/email",{currentPassword:"wrong",email:"new@example.com"},400);
   await request(a,"auth/revoke-sessions",{currentPassword:nextPassword});
   assert.equal((await request(a,"me")).body.user.id,user.id);
   assert.equal((await request(b,"me")).body.user,null);
